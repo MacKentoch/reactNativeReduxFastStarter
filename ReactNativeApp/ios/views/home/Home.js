@@ -5,11 +5,22 @@ import React, {
   StyleSheet,
   View,
   Text
-}               from 'react-native';
+}                             from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect }            from 'react-redux';
+import * as viewsActions      from '../../../common/redux/actions';
 
 class Home extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentWillMount() {
+    this.props.actions.enterHome();
+  }
+
+  componentWillUnmount() {
+    this.props.actions.leaveHome();
   }
 
   render() {
@@ -23,9 +34,10 @@ class Home extends Component {
   }
 }
 
-// Home.propTypes = {
-//
-// };
+Home.propTypes = {
+  navigator     : React.PropTypes.object,
+  navigate      : React.PropTypes.func
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -33,4 +45,23 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    currentView:  state.views
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions : bindActionCreators(
+      {
+        ...viewsActions
+      },
+      dispatch)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

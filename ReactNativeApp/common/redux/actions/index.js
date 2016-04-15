@@ -2,11 +2,15 @@
 
 import {
   enterHome,
-  leaveHome
+  leaveHome,
+  enterAppState,
+  leaveAppState
 }             from './views';
 
 
 export {
   enterHome,
-  leaveHome
+  leaveHome,
+  enterAppState,
+  leaveAppState  
 };

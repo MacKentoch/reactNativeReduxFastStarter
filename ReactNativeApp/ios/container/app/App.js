@@ -144,7 +144,10 @@ class App extends Component {
 
     return (
       <SideMenu
-        menu={<SideMenuContent backGndColor="#ECECEC" />}
+        menu={<SideMenuContent
+                backGndColor="#ECECEC"
+                navigate={(route)=>this.navigate(route)}
+              />}
         isOpen={this.state.sideMenuOpened}
         onChange={(isOpened) => this.updateSideMenuState(isOpened)}
         bounceBackOnOverdraw={false}
