@@ -10,42 +10,31 @@ import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 import * as viewsActions      from '../../../common/redux/actions';
 
-class AppState extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
   }
 
   componentWillMount() {
-    this.props.actions.enterAppState();
+    this.props.actions.enterHome();
   }
 
   componentWillUnmount() {
-    this.props.actions.leaveAppState();
+    this.props.actions.leaveHome();
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.subContainer}>
-          <Text>
-            currentView:
-            {this.props.currentView.currentView}
-          </Text>
-          <Text>
-            enterTime:
-            {this.props.currentView.enterTime}
-          </Text>
-          <Text>
-            leaveTime:
-            {this.props.currentView.leaveTime}
-          </Text>
-        </View>
+        <Text>
+          Home view
+        </Text>
       </View>
     );
   }
 }
 
-AppState.propTypes = {
+Home.propTypes = {
   navigator     : React.PropTypes.object,
   navigate      : React.PropTypes.func
 };
@@ -53,13 +42,6 @@ AppState.propTypes = {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },
-  subContainer: {
-    flex:           1,
-    flexDirection: 'column',
-    marginTop:      80,
-    paddingLeft:    5,
-    paddingRight:   5
   }
 });
 
@@ -82,4 +64,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AppState);
+)(Home);

@@ -13,7 +13,7 @@ import { AppRoutes }  from '../../../common/config';
 
 const window    = Dimensions.get('window');
 
-class SideMenuContent extends Component {
+class DrawerContent extends Component {
   constructor(props) {
     super(props);
   }
@@ -61,11 +61,14 @@ class SideMenuContent extends Component {
   }
 }
 
-SideMenuContent.propTypes = {
-  backGndColor: React.PropTypes.string
+DrawerContent.propTypes = {
+  backGndColor: React.PropTypes.string,
+  openDrawer:   React.PropTypes.func,
+  closeDrawer:  React.PropTypes.func,
+  navigate:     React.PropTypes.func
 };
 
-SideMenuContent.defaultProps = {
+DrawerContent.defaultProps = {
   backGndColor: '#fff'
 };
 
@@ -104,4 +107,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SideMenuContent;
+export default DrawerContent;

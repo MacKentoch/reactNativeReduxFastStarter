@@ -16,9 +16,9 @@
     "ES2015"
   ],
   "repository": {
-  "type": "git",
-  "url": "git+https://github.com/MacKentoch/reactNativeReduxFastStarter.git"
-},
+    "type": "git",
+    "url": "git+https://github.com/MacKentoch/reactNativeReduxFastStarter.git"
+  },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
