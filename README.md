@@ -5,6 +5,8 @@ This React Native starter is my own React Native starter (`iOS` and `android`).
 
 It contains all I need or find useful most of the time in a mobile application.
 
+![preview](./ios-preview.gif)
+
 ### setup and launch
 
 Just follow [official website instructions](https://facebook.github.io/react-native/docs/getting-started.html) (*it is well documented*).
