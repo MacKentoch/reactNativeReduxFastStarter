@@ -1,14 +1,13 @@
 'use strict';
 
 import React, {
-  Component,
+  Component
+}                             from 'react';
+import {
   StyleSheet,
   View,
   Text
 }                             from 'react-native';
-import { bindActionCreators } from 'redux';
-import { connect }            from 'react-redux';
-import * as viewsActions      from '../../../common/redux/actions';
 
 class AppState extends Component {
   constructor(props) {
@@ -16,11 +15,11 @@ class AppState extends Component {
   }
 
   componentWillMount() {
-    this.props.actions.enterAppState();
+    this.props.enterAppState();
   }
 
   componentWillUnmount() {
-    this.props.actions.leaveAppState();
+    this.props.leaveAppState();
   }
 
   render() {
@@ -63,23 +62,4 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state) => {
-  return {
-    currentView:  state.views
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions : bindActionCreators(
-      {
-        ...viewsActions
-      },
-      dispatch)
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AppState);
+export default AppState;

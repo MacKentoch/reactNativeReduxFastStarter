@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {Component}   from 'react-native';
+import React, {Component}   from 'react';
 import { App }              from './container';
 import { Provider }         from 'react-redux';
 import configureStore       from '../common/redux/store/configureStore';

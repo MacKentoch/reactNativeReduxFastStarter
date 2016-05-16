@@ -11,7 +11,7 @@ const routes = [{
   },
   navbar: {
     navBarTitle         : 'Home',
-    navBarLeftIconName  : 'navicon',
+    navBarLeftIconName  : 'ios-menu',
     navBarLeftIconSize  : 32
   }
 }, {
@@ -25,7 +25,7 @@ const routes = [{
   },
   navbar: {
     navBarTitle         : 'App State',
-    navBarLeftIconName  : 'navicon',
+    navBarLeftIconName  : 'ios-menu',
     navBarLeftIconSize  : 32
   }
 }];

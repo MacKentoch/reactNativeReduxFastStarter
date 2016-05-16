@@ -1,10 +1,11 @@
 'use strict';
 
 import React, {
-  Component,
+  Component
+}                           from 'react';
+import {
   StyleSheet,
   Text,
-  View,
   Dimensions,
   Navigator,
   DrawerLayoutAndroid
@@ -15,10 +16,8 @@ import {
   DrawerContent,
   Button
 }                           from '../../components';
-import {
-  Home,
-  AppState
-}                           from '../../views';
+import Home                 from '../home';
+import AppState             from '../appState';
 
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -31,7 +30,6 @@ class App extends Component {
   }
 
   init() {
-
     this.state = {
       DrawerOpened: false,
       drawerWidth:  DRAWER_WIDTH
@@ -113,7 +111,7 @@ class App extends Component {
         <Home
           ref={route1.refView}
           navigator={navigator}
-          navigate={(toRoute)=>navigate(toRoute)}
+          navigate={(toRoute)=>this.navigate(toRoute)}
         />
       );
     case 2:
@@ -122,16 +120,15 @@ class App extends Component {
         <AppState
           ref={route2.refView}
           navigator={navigator}
-          navigate={(toRoute)=>navigate(toRoute)}
+          navigate={(toRoute)=>this.navigate(toRoute)}
         />
       );
     default:
-      const routeDEFAULT = AppRoutes.getRouteFromRouteId(1);
       return (
         <Home
           ref={route1.refView}
           navigator={navigator}
-          navigate={(toRoute)=>navigate(toRoute)}
+          navigate={(toRoute)=>this.navigate(toRoute)}
         />
       );
     }
@@ -142,9 +139,9 @@ class App extends Component {
     return  {
       Title : (route, navigator, index, navState) => {
         const currentRouteId  = navState.routeStack[index].id;
-        return(
+        return (
           <Text style={styles.titleNavText}>
-            {routes[currentRouteId-1].navbar.navBarTitle}
+            {routes[currentRouteId - 1].navbar.navBarTitle}
           </Text>
         );
       },
@@ -156,7 +153,7 @@ class App extends Component {
             onPress={(e)=>this.toggleDrawer(e)
             }>
             <Icon
-              name={routes[currentRouteId-1].navbar.navBarLeftIconName}
+              name={routes[currentRouteId - 1].navbar.navBarLeftIconName}
               size={32}
               color={'#333333'}
             />

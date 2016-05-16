@@ -1,3 +1,5 @@
+'use strict';
+
 import SideMenuContent  from './sidemenu/SideMenuContent';
 import Button           from './button/Button';
 

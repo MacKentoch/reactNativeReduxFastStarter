@@ -3,7 +3,7 @@ React Native Redux Fast Starter
 
 This React Native starter is my own React Native starter (`iOS` and `android`).
 
-It contains all I need or find useful most of the time in a mobile application.
+It contains all I need or find useful most of the time to start a new mobile application.
 
 ![preview](./ios-preview.gif)
 
@@ -23,6 +23,13 @@ Just follow [official website instructions](https://facebook.github.io/react-nat
 - **both**: `react-native-vector-icons`
 - **both**: *more content may be added later*
 
+
+### news
+- 16/05/2016
+  - update ReactNative to v0.25.1 (React v0.14.8)
+  - update dependencies
+  - add eslint (*babel-eslint, plusgins...*)
+  - redux connected components are now connected through a container (*not directly*)
 
 ### license
 

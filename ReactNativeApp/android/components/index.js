@@ -1,3 +1,5 @@
+'use strict';
+
 import DrawerContent  from './drawerContent/DrawerContent';
 import Button           from './button/Button';
 

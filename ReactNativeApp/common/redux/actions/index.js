@@ -7,10 +7,9 @@ import {
   leaveAppState
 }             from './views';
 
-
 export {
   enterHome,
   leaveHome,
   enterAppState,
-  leaveAppState  
+  leaveAppState
 };

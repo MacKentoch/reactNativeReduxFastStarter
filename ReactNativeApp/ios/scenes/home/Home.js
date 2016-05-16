@@ -1,14 +1,14 @@
 'use strict';
 
 import React, {
-  Component,
+  Component
+}                             from 'react';
+import {
   StyleSheet,
   View,
   Text
 }                             from 'react-native';
-import { bindActionCreators } from 'redux';
-import { connect }            from 'react-redux';
-import * as viewsActions      from '../../../common/redux/actions';
+
 
 class Home extends Component {
   constructor(props) {
@@ -16,11 +16,11 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    this.props.actions.enterHome();
+    this.props.enterHome();
   }
 
   componentWillUnmount() {
-    this.props.actions.leaveHome();
+    this.props.leaveHome();
   }
 
   render() {
@@ -45,23 +45,5 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state) => {
-  return {
-    currentView:  state.views
-  };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions : bindActionCreators(
-      {
-        ...viewsActions
-      },
-      dispatch)
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default Home;
