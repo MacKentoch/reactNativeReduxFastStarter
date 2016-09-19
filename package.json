@@ -1,6 +1,6 @@
 {
   "name": "reactNativeReduxFastStarter",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "author": "Erwan DATIN (MacKentoch)",
   "license": "MIT",
   "description": "React Native Redux fast Starter",
@@ -23,20 +23,21 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "react": "^0.14.8",
-    "react-native": "^0.25.1",
-    "react-native-animatable": "^0.6.0",
+    "react": "15.3.1",
+    "react-native": "0.33.0",
+    "react-native-animatable": "^0.6.1",
     "react-native-dismiss-keyboard": "^1.0.0",
-    "react-native-side-menu": "^0.19.0",
-    "react-native-vector-icons": "^2.0.2",
+    "react-native-side-menu": "^0.20.0",
+    "react-native-vector-icons": "^2.1.0",
     "react-redux": "^4.4.5",
-    "redux": "^3.5.2",
+    "redux": "^3.6.0",
     "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
-    "babel-eslint": "^6.0.4",
-    "eslint": "^2.10.1",
-    "eslint-plugin-react": "^5.1.1",
-    "eslint-plugin-react-native": "^1.0.2"
+    "babel-eslint": "^6.1.2",
+    "eslint": "^3.5.0",
+    "eslint-plugin-react": "^6.2.2",
+    "eslint-plugin-react-native": "^2.0.0",
+    "redux-logger": "^2.6.1"
   }
 }
