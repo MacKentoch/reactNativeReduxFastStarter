@@ -25,9 +25,8 @@ Just follow [official website instructions](https://facebook.github.io/react-nat
 
 
 ### news
-- 18/09/2016
-  - update ReactNative to v0.33.0
-  - add `redux-logger` for development (*since so helpful*)
+- 02/10/2016
+  - redux go `ducks-modular-redux` ([see proposal](https://github.com/erikras/ducks-modular-redux))
 
 
 ### license

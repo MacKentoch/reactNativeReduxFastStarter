@@ -21,58 +21,57 @@ import Home                 from '../home';
 import AppState             from '../appState';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
+const OPEN_SIDE_MENU_OFFSET = SCREEN_WIDTH * 0.8;
+const DEFAULT_ROUTE = { id: 1, refView: 'HomeView' };
+
+/*
+  set iOS StatusBar style:
+ */
+StatusBar.setBarStyle('default', true);
+// StatusBar.setBarStyle('light-content', true);
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.init();
+
+  state = {
+    sideMenuOpened: false
+  };
+
+  render() {
+    const { sideMenuOpened } = this.state;
+
+    return (
+      <SideMenu
+        menu={<SideMenuContent
+                backGndColor="#ECECEC"
+                navigate={this.navigate}
+              />}
+        isOpen={sideMenuOpened}
+        onChange={this.updateSideMenuState}
+        bounceBackOnOverdraw={false}
+        openMenuOffset={OPEN_SIDE_MENU_OFFSET}
+        >
+        <Navigator
+          ref="navigator"
+          initialRoute={ DEFAULT_ROUTE }
+          sceneStyle={ styles.navigator }
+          renderScene={this.renderScene}
+          configureScene={this.configureScene}
+          navigationBar={
+            <Navigator.NavigationBar
+              routeMapper={this.renderRouteMapper()}
+              style={styles.navBar}
+            />
+          }
+        />
+      </SideMenu>
+    );
   }
 
-  init() {
-    this.state = {
-      sideMenuOpened: false
-    };
+  configureScene = () => {
+    return Navigator.SceneConfigs.FadeAndroid;
   }
 
-  openSideMenu() {
-    this.setState({
-      sideMenuOpened : false
-    });
-  }
-
-  closeSideMenu() {
-    if (this.state.sideMenuOpened) {
-      this.setState({
-        sideMenuOpened : false
-      });
-    }
-  }
-
-  toggleSideMenu() {
-    this.setState({
-      sideMenuOpened: !this.state.sideMenuOpened
-    });
-  }
-
-  updateSideMenuState(isOpened) {
-    this.setState({
-      sideMenuOpened: isOpened
-    });
-  }
-
-  navigate(route) {
-    const routeStack      = [].concat(this.refs.navigator.getCurrentRoutes());
-    const previousRouteId = routeStack[routeStack.length - 1].id;
-    if (route.id !== previousRouteId) {
-      this.refs.navigator.replace(route);
-    }
-
-    if (this.state.sideMenuOpened) {
-      this.closeSideMenu();
-    }
-  }
-
-  renderScene(route, navigator) {
+  renderScene = (route, navigator) => {
     switch (route.id) {
     case 1:
       const route1 = AppRoutes.getRouteFromRouteId(1);
@@ -80,7 +79,7 @@ class App extends Component {
         <Home
           ref={route1.refView}
           navigator={navigator}
-          navigate={(toRoute)=>this.navigate(toRoute)}
+          navigate={this.navigate}
         />
       );
     case 2:
@@ -89,7 +88,7 @@ class App extends Component {
         <AppState
           ref={route2.refView}
           navigator={navigator}
-          navigate={(toRoute)=>this.navigate(toRoute)}
+          navigate={this.navigate}
         />
       );
     default:
@@ -97,7 +96,7 @@ class App extends Component {
         <Home
           ref={route1.refView}
           navigator={navigator}
-          navigate={(toRoute)=>this.navigate(toRoute)}
+          navigate={this.navigate}
         />
       );
     }
@@ -119,8 +118,7 @@ class App extends Component {
         return (
           <Button
             style={styles.leftNavButton}
-            onPress={(e)=>this.toggleSideMenu(e)
-            }>
+            onPress={this.toggleSideMenu}>
             <Icon
               name={routes[currentRouteId - 1].navbar.navBarLeftIconName}
               size={32}
@@ -133,39 +131,44 @@ class App extends Component {
         return null;
       }
     };
-
   }
 
-  render() {
-    StatusBar.setBarStyle('light-content', true);
-    const DEFAULT_ROUTE = { id: 1, refView: 'HomeView' };
+  navigate = (route) => {
+    const routeStack = [...this.refs.navigator.getCurrentRoutes()];
+    const previousRouteId = routeStack[routeStack.length - 1].id;
+    if (route.id !== previousRouteId) {
+      this.refs.navigator.replace(route);
+    }
 
-    return (
-      <SideMenu
-        menu={<SideMenuContent
-                backGndColor="#ECECEC"
-                navigate={(route)=>this.navigate(route)}
-              />}
-        isOpen={this.state.sideMenuOpened}
-        onChange={(isOpened) => this.updateSideMenuState(isOpened)}
-        bounceBackOnOverdraw={false}
-        openMenuOffset={SCREEN_WIDTH * 0.8}
-        >
-        <Navigator
-          ref="navigator"
-          initialRoute={ DEFAULT_ROUTE }
-          sceneStyle={ styles.navigator }
-          renderScene={(route, navigator)=>this.renderScene(route, navigator)}
-          configureScene={()=>Navigator.SceneConfigs.FadeAndroid}
-          navigationBar={
-            <Navigator.NavigationBar
-              routeMapper={this.renderRouteMapper()}
-              style={styles.navBar}
-            />
-          }
-        />
-      </SideMenu>
-    );
+    if (this.state.sideMenuOpened) {
+      this.closeSideMenu();
+    }
+  }
+
+  updateSideMenuState = (isOpened) => {
+    this.setState({
+      sideMenuOpened: isOpened
+    });
+  }
+
+  toggleSideMenu = () => {
+    this.setState({
+      sideMenuOpened: !this.state.sideMenuOpened
+    });
+  }
+
+  openSideMenu = () => {
+    this.setState({
+      sideMenuOpened : false
+    });
+  }
+
+  closeSideMenu = () => {
+    if (this.state.sideMenuOpened) {
+      this.setState({
+        sideMenuOpened : false
+      });
+    }
   }
 }
 
