@@ -10,39 +10,17 @@ import {
   Dimensions,
   ScrollView
 }                     from 'react-native';
-import Button         from '../button/Button';
+import shallowCompare from 'react-addons-shallow-compare';
 import { AppRoutes }  from '../../../common/config';
+import DrawerMenuLink from './DrawerMenuLink';
 
-const window    = Dimensions.get('window');
+const window = Dimensions.get('window');
+const routes = AppRoutes.getAllRoutes();
 
 class DrawerContent extends Component {
-  constructor(props) {
-    super(props);
-  }
 
-  handleNavButtonPress(event, route) {
-    this.props.navigate(route);
-  }
-
-  renderSideMenuButtons() {
-    const routes          = AppRoutes.getAllRoutes();
-    const SideMenuButtons = routes.map((route) => {
-
-      return (
-        <View
-          style={styles.rowContent}
-          key={route.id}>
-          <Button
-            style={[styles.navButton]}
-            onPress={(e)=>this.handleNavButtonPress(e, {id : route.id})} >
-            <Text style={styles.navButtonText}>
-              {route.sidemenu.sideMenuButtonText}
-            </Text>
-          </Button>
-        </View>
-      );
-    });
-    return SideMenuButtons;
+  shouldComponentUpdate(nextProps, nextState) {
+    return shallowCompare(this, nextProps, nextState);
   }
 
   render() {
@@ -52,14 +30,32 @@ class DrawerContent extends Component {
         scrollsToTop={false}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerText}>
-            SideMenu header here
+            DrawerMenu header here
           </Text>
         </View>
         <View style={styles.menusContainer}>
-          {this.renderSideMenuButtons()}
+        {
+          routes.map(
+            ({ id, sidemenu: { sideMenuButtonText, iconName, iconSize }}, idx) => {
+              return (
+                <DrawerMenuLink
+                  key={idx}
+                  id={id}
+                  iconName={iconName}
+                  iconSize={iconSize}
+                  handleNavButtonPress={this.handleNavButtonPress}
+                  sideMenuButtonText={sideMenuButtonText}
+                />
+              );
+          })
+        }
         </View>
       </ScrollView>
     );
+  }
+
+  handleNavButtonPress = (event, route) => {
+    this.props.navigate(route);
   }
 }
 

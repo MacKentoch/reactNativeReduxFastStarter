@@ -20,6 +20,7 @@ import {
 import Home                 from '../home';
 import AppState             from '../appState';
 
+
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const OPEN_SIDE_MENU_OFFSET = SCREEN_WIDTH * 0.8;
 const DEFAULT_ROUTE = { id: 1, refView: 'HomeView' };
@@ -174,13 +175,11 @@ class App extends Component {
 
 const styles = StyleSheet.create({
   navigator: {
-    backgroundColor: '#fff',
-    borderLeftWidth: 0.5,
-    borderLeftColor: '#F1F1F1',
+    backgroundColor: '#fff'
   },
   navBar: {
     backgroundColor: '#fff',
-    borderWidth:      0.5,
+    borderWidth:      StyleSheet.hairlineWidth,
     borderColor:    '#F1F1F1'
   },
   leftNavButton : {

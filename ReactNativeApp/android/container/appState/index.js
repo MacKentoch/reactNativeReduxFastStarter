@@ -1,8 +1,9 @@
 'use strict';
 
-import { AppState }             from '../../scenes';
-import { connect }              from 'react-redux';
-import * as actions             from '../../../common/redux/actions';
+import { AppState }           from '../../scenes';
+import { bindActionCreators } from 'redux';
+import { connect }            from 'react-redux';
+import * as viewsActions      from '../../../common/redux/modules/views';
 
 const mapStateToProps = (state) => {
   return {
@@ -11,11 +12,24 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    enterAppState: () => dispatch(actions.enterAppState()),
-    leaveAppState: () => dispatch(actions.leaveAppState())
-  };
+  return bindActionCreators(
+      {
+        enterAppState: viewsActions.enterAppState,
+        leaveAppState: viewsActions.leaveAppState
+      },
+      dispatch
+    );
 };
+
+/*
+  if you don't use bindActionCreators
+ */
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     enterAppState: () => dispatch(viewsActions.enterAppState()),
+//     leaveAppState: () => dispatch(viewsActions.leaveAppState())
+//   };
+// };
 
 export default connect(
   mapStateToProps,

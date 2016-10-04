@@ -22,88 +22,58 @@ import AppState             from '../appState';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const DRAWER_WIDTH = SCREEN_WIDTH ? SCREEN_WIDTH * 0.8 : 300;
+const DEFAULT_ROUTE = { id: 1, refView: 'HomeView' };
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.init();
+
+  state = {
+    DrawerOpened: false,
+    drawerWidth:  DRAWER_WIDTH
+  };
+
+  render() {
+    return (
+      <DrawerLayoutAndroid
+        ref="drawer"
+        drawerWidth={this.state.drawerWidth}
+        drawerPosition={DrawerLayoutAndroid.positions.Left}
+        renderNavigationView={
+          () => {
+            return (
+              <DrawerContent
+                openDrawer={this.openDrawer}
+                closeDrawer={this.closeDrawer}
+                navigate={this.navigate}
+              />
+            );
+          }
+        }
+        openDrawer={this.handlesDrawerOpen}
+        onDrawerOpen={this.onDrawerOpenEvent}
+        closeDrawer={this.handlesDrawerClose}
+        onDrawerClose={this.onDrawerCloseEvent}>
+        <Navigator
+          ref="navigator"
+          initialRoute={ DEFAULT_ROUTE }
+          sceneStyle={ styles.navigator }
+          renderScene={this.renderScene}
+          configureScene={this.configureScene}
+          navigationBar={
+            <Navigator.NavigationBar
+              routeMapper={this.renderRouteMapper()}
+              style={styles.navBar}
+            />
+          }
+        />
+    </DrawerLayoutAndroid>
+    );
   }
 
-  init() {
-    this.state = {
-      DrawerOpened: false,
-      drawerWidth:  DRAWER_WIDTH
-    };
+  configureScene = () => {
+    return Navigator.SceneConfigs.FadeAndroid;
   }
 
-  handlesDrawerOpen() {
-    // dismissKeyboard(); // when needed
-  }
-
-  onDrawerOpenEvent() {
-    this.setState({
-      DrawerOpened : true
-    });
-  }
-
-  handlesDrawerClose() {
-    // something specific to add here
-  }
-
-  onDrawerCloseEvent() {
-    this.setState({
-      DrawerOpened : false
-    });
-  }
-
-  openDrawer() {
-    if (this.state.DrawerOpened) {
-      this.refs.drawer.openDrawer();
-      this.setState({
-        DrawerOpened: true
-      });
-    }
-  }
-
-  closeDrawer() {
-    if (this.state.DrawerOpened) {
-      this.refs.drawer.closeDrawer();
-      this.setState({
-        DrawerOpened : false
-      });
-    }
-  }
-
-  toggleDrawer() {
-    if (this.state.DrawerOpened) {
-      this.refs.drawer.closeDrawer();
-    } else {
-      this.refs.drawer.openDrawer();
-    }
-    this.setState({
-      DrawerOpened: !this.state.DrawerOpened
-    });
-  }
-
-  updateDrawerState(isOpened) {
-    this.setState({
-      DrawerOpened: isOpened
-    });
-  }
-
-  navigate(route) {
-    const routeStack      = [].concat(this.refs.navigator.getCurrentRoutes());
-    const previousRouteId = routeStack[routeStack.length - 1].id;
-    if (route.id !== previousRouteId) {
-      this.refs.navigator.replace(route);
-    }
-
-    if (this.state.DrawerOpened) {
-      this.closeDrawer();
-    }
-  }
-
-  renderScene(route, navigator) {
+  renderScene = (route, navigator) => {
     switch (route.id) {
     case 1:
       const route1 = AppRoutes.getRouteFromRouteId(1);
@@ -164,59 +134,83 @@ class App extends Component {
         return null;
       }
     };
-
   }
 
-  render() {
-    const DEFAULT_ROUTE = { id: 1, refView: 'HomeView' };
+  navigate = (route) => {
+    const routeStack = [...this.refs.navigator.getCurrentRoutes()];
+    const previousRouteId = routeStack[routeStack.length - 1].id;
+    if (route.id !== previousRouteId) {
+      this.refs.navigator.replace(route);
+    }
 
-    return (
-      <DrawerLayoutAndroid
-        ref="drawer"
-        drawerWidth={this.state.drawerWidth}
-        drawerPosition={DrawerLayoutAndroid.positions.Left}
-        renderNavigationView={
-          () => {
-            return (
-              <DrawerContent
-                openDrawer={()=>this.openDrawer()}
-                closeDrawer={()=>this.closeDrawer()}
-                navigate={(route)=>this.navigate(route)}
-              />
-            );
-          }
-        }
-        openDrawer={()=>this.handlesDrawerOpen()}
-        onDrawerOpen={()=>this.onDrawerOpenEvent()}
-        closeDrawer={()=>this.handlesDrawerClose()}
-        onDrawerClose={()=>this.onDrawerCloseEvent()}>
-        <Navigator
-          ref="navigator"
-          initialRoute={ DEFAULT_ROUTE }
-          sceneStyle={ styles.navigator }
-          renderScene={(route, navigator)=>this.renderScene(route, navigator)}
-          configureScene={()=>Navigator.SceneConfigs.FadeAndroid}
-          navigationBar={
-            <Navigator.NavigationBar
-              routeMapper={this.renderRouteMapper()}
-              style={styles.navBar}
-            />
-          }
-        />
-    </DrawerLayoutAndroid>
-    );
+    if (this.state.DrawerOpened) {
+      this.closeDrawer();
+    }
+  }
+
+  handlesDrawerOpen = () => {
+    // dismissKeyboard(); // when needed
+  }
+
+  onDrawerOpenEvent = () => {
+    this.setState({
+      DrawerOpened : true
+    });
+  }
+
+  handlesDrawerClose = () => {
+    // something specific to add here
+  }
+
+  onDrawerCloseEvent = () => {
+    this.setState({
+      DrawerOpened : false
+    });
+  }
+
+  openDrawer = () => {
+    if (this.state.DrawerOpened) {
+      this.refs.drawer.openDrawer();
+      this.setState({
+        DrawerOpened: true
+      });
+    }
+  }
+
+  closeDrawer = () => {
+    if (this.state.DrawerOpened) {
+      this.refs.drawer.closeDrawer();
+      this.setState({
+        DrawerOpened : false
+      });
+    }
+  }
+
+  toggleDrawer = () => {
+    if (this.state.DrawerOpened) {
+      this.refs.drawer.closeDrawer();
+    } else {
+      this.refs.drawer.openDrawer();
+    }
+    this.setState({
+      DrawerOpened: !this.state.DrawerOpened
+    });
+  }
+
+  updateDrawerState(isOpened) {
+    this.setState({
+      DrawerOpened: isOpened
+    });
   }
 }
 
 const styles = StyleSheet.create({
   navigator: {
     backgroundColor: '#fff',
-    borderLeftWidth: 0.5,
-    borderLeftColor: '#F1F1F1',
   },
   navBar: {
     backgroundColor: '#fff',
-    borderWidth:      0.5,
+    borderWidth:      StyleSheet.hairlineWidth,
     borderColor:    '#F1F1F1',
     elevation : 2
   },

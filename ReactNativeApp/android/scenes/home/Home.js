@@ -1,25 +1,26 @@
 'use strict';
 
 import React, {
+  PropTypes,
   Component
-}                             from 'react';
+}                   from 'react';
 import {
   StyleSheet,
   View,
   Text
-}                             from 'react-native';
+}                   from 'react-native';
+
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentWillMount() {
-    this.props.enterHome();
+    const { enterHome } = this.props;
+    enterHome();
   }
 
   componentWillUnmount() {
-    this.props.leaveHome();
+    const { leaveHome } = this.props;
+    leaveHome();
   }
 
   render() {
@@ -34,8 +35,8 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  navigator     : React.PropTypes.object,
-  navigate      : React.PropTypes.func
+  navigator:  PropTypes.object,
+  navigate:   PropTypes.func
 };
 
 const styles = StyleSheet.create({

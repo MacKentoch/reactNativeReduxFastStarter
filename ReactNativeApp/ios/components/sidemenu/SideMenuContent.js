@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     flexDirection:      'row',
     height:             30,
     marginTop:          20,
-    borderBottomWidth:  0.5,
+    borderBottomWidth:  StyleSheet.hairlineWidth,
     borderBottomColor: '#333333'
   },
   headerText: {
