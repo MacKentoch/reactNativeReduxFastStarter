@@ -20,7 +20,7 @@ const routes = [{
   sidemenu: {
     sideMenuButtonText  : 'App State',
     iconType            : 'ionicons',
-    iconName            : 'soup-can-outline',
+    iconName            : 'ios-albums-outline',
     iconSize            : 22,
   },
   navbar: {
@@ -33,20 +33,15 @@ const routes = [{
 
 class AppRoutesClass {
   getRouteFromRouteId(routeId) {
-    const routeFound = routes.find((route) => {
-      if (route.id === routeId) {
-        return route;
-      }
-    });
-    return routeFound;
+    return routes.find(route => route.id === routeId);
   }
 
   getAllRoutes() {
-    return [].concat(routes);
+    return [...routes];
   }
 }
 
 
-let AppRoutes = new AppRoutesClass();
+const AppRoutes = new AppRoutesClass();
 
 export default AppRoutes;

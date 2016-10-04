@@ -1,17 +1,16 @@
 'use strict';
 import React, {
   Component
-}                   from 'react';
+}                     from 'react';
 import {
   TouchableOpacity,
-  View,
-  Text
-}                   from 'react-native';
+  View
+}                     from 'react-native';
+import shallowCompare from 'react-addons-shallow-compare';
 
 class Button extends Component {
-
-  handlePress(event) {
-    this.props.onPress(event);
+  shouldComponentUpdate(nextProps, nextState) {
+    return shallowCompare(this, nextProps, nextState);
   }
 
   render() {
@@ -19,13 +18,17 @@ class Button extends Component {
       <View>
         <TouchableOpacity
           style={this.props.style}
-          onPress={(e)=>this.handlePress(e)} >
-          <Text>
+          onPress={this.handlePress} >
+          <View style={{ flexDirection: 'row', alignItems: 'center'}}>
             {this.props.children}
-          </Text>
+          </View>
         </TouchableOpacity>
       </View>
     );
+  }
+
+  handlePress = (event) => {
+    this.props.onPress(event);
   }
 }
 

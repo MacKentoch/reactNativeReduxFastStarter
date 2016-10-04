@@ -1,6 +1,7 @@
 'use strict';
 
 import React, {
+  PropTypes,
   Component
 }                             from 'react';
 import {
@@ -11,16 +12,15 @@ import {
 
 
 class AppState extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentWillMount() {
-    this.props.enterAppState();
+    const { enterAppState } = this.props;
+    enterAppState();
   }
 
   componentWillUnmount() {
-    this.props.leaveAppState();
+    const { leaveAppState } = this.props;
+    leaveAppState();
   }
 
   render() {
@@ -46,8 +46,8 @@ class AppState extends Component {
 }
 
 AppState.propTypes = {
-  navigator     : React.PropTypes.object,
-  navigate      : React.PropTypes.func
+  navigator:  PropTypes.object,
+  navigate:   PropTypes.func
 };
 
 const styles = StyleSheet.create({
@@ -62,6 +62,5 @@ const styles = StyleSheet.create({
     paddingRight:   5
   }
 });
-
 
 export default AppState;
