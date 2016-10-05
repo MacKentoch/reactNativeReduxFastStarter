@@ -179,8 +179,8 @@ const styles = StyleSheet.create({
   },
   navBar: {
     backgroundColor: '#fff',
-    borderWidth:      StyleSheet.hairlineWidth,
-    borderColor:    '#F1F1F1'
+    borderBottomWidth:      StyleSheet.hairlineWidth,
+    borderBottomColor:    '#F1F1F1'
   },
   leftNavButton : {
     flex            : 1,
