@@ -7,6 +7,8 @@ It contains all I need or find useful most of the time to start a new mobile app
 
 <img src="https://raw.githubusercontent.com/MacKentoch/reactNativeReduxFastStarter/master/ios-preview.gif" alt="preview" width="320px"></img>
 
+Alternative Starter for iOS with combination of `tabBar` and `sidemenu` [here](https://github.com/MacKentoch/reactNativeReduxSidemenuTabbarStarter).
+
 ### setup and launch
 
 Just follow [official website instructions](https://facebook.github.io/react-native/docs/getting-started.html) (*it is well documented*).
