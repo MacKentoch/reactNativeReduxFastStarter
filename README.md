@@ -1,6 +1,10 @@
 React Native Redux Fast Starter
 ====
 
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/Mp96tCWH2KdajZuBzqB6jwj8/MacKentoch/reactNativeReduxFastStarter'>
+  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/Mp96tCWH2KdajZuBzqB6jwj8/MacKentoch/reactNativeReduxFastStarter.svg' />
+</a>
+
 This React Native starter is my own React Native starter (`iOS` and `android`).
 
 It contains all I need or find useful most of the time to start a new mobile application.
